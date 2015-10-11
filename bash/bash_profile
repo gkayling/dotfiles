@@ -1,0 +1,37 @@
+# Enable options:
+shopt -s cdable_vars
+shopt -s checkhash
+shopt -s checkwinsize
+shopt -s no_empty_cmd_completion
+shopt -s cmdhist
+shopt -s histappend histreedit histverify
+shopt -s extglob       # Necessary for programmable completion.
+
+#   Set Default Editor
+#   ------------------------------------------------------------
+    export EDITOR=/usr/bin/vim
+
+#   Set default blocksize for ls, df, du
+#   from this: http://hints.macworld.com/comment.php?mode=view&cid=24492
+#   ------------------------------------------------------------
+    export BLOCKSIZE=1k
+
+date
+if [ -x /usr/games/fortune ]; then
+    if [ -x /usr/games/cowsay ]; then
+        /usr/games/fortune -s | /usr/games/cowsay
+    else
+        /usr/games/fortune -s
+    fi
+fi
+
+# Add colors for filetype and  human-readable sizes by default on 'ls':
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+export TIMEFORMAT=$'\nreal %3R\tuser %3U\tsys %3S\tpcpu %P\n'
+export HISTIGNORE="&:bg:fg:ll:h"
+export HISTTIMEFORMAT="$(echo -e ${BCyan})[20%y-%m-%d %H:%M:%S]$(echo -e ${NC}) "
+export HISTCONTROL=ignoredups
+
+source ~/.git-prompt.sh
+PS1='\[\e[1;37m\]\[\e[1;32m\]\u\[\e[0;39m\]@\[\e[1;36m\]\h\[\e[0;39m\]:\[\e[1;33m\]\w\[\e[0;39m\]\[\e[1;35m\]$(__git_ps1 " (%s)")\[\e[0;39m\] \[\e[1;37m\]\[\e[0;39m\]$ '
